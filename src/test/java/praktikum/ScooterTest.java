@@ -12,17 +12,20 @@ public class ScooterTest {
 
     private String INVALID_ORDER_ID = "123";
 
+    /** Если ввести неправильный номер заказа, попадёшь на страницу статуса заказа.
+     На ней должно быть написано, что такого заказа нет */
+
     @Test
     public void openMainPage() throws Exception {
         WebDriver driver = factory.getDriver();
-        var mainPain = new MainPage(driver);
+        var mainPage = new MainPage(driver);
 
-        mainPain.open();
+        mainPage.open();
 
-        mainPain.clickOnStatus();
-        mainPain.enterOrderId(INVALID_ORDER_ID);
+        mainPage.clickOnStatus();
+        mainPage.enterOrderId(INVALID_ORDER_ID);
 
-        StatusPage statusPage = mainPain.clickOnGo();
+        StatusPage statusPage = mainPage.clickOnGo();
         statusPage.checkErrorMessage();
     }
 }

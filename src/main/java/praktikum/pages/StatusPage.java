@@ -13,7 +13,6 @@ import static org.junit.Assert.assertTrue;
 public class StatusPage {
     private final WebDriver driver;
 
-    // also .//img[@alt='Not found']
     private final By img = By.cssSelector("img[alt='Not found']");
 
     public StatusPage(WebDriver driver) {
