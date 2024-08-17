@@ -31,5 +31,6 @@ public class OrderScooterTest {
         orderPageSecond.addComment();
         orderPageSecond.clickFinalButton();
         orderPageSecond.confirmOrder();
+        orderPageSecond.checkOrderModal();
     }
 }

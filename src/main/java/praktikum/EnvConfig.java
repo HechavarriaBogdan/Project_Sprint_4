@@ -1,7 +1,5 @@
 package praktikum;
 
-import javax.print.DocFlavor;
-
 public class EnvConfig {
     public static final String BASE_URL = "https://qa-scooter.praktikum-services.ru/";
     public static final int CHROME_IMPLICIT_WAIT = 5;

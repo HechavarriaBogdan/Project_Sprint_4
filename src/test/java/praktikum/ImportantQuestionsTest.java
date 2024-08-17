@@ -78,6 +78,8 @@ public class ImportantQuestionsTest {
         By answerText = By.id(buttonId.replace("heading", "panel")); // заменяем `heading` на `panel` для текста
         // Прокручиваем страницу до нужного элемента
         mainMage.scrollForElement(questionButton);
+        // Добавили явное ожидание
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT)).until(ExpectedConditions.visibilityOfElementLocated(questionButton));
         // Нажимаем на нужный элемент
         mainMage.clickOnQuestion(questionButton);
         // Добавили явное ожидание

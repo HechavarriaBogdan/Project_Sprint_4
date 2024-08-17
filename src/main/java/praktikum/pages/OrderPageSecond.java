@@ -3,8 +3,14 @@ package praktikum.pages;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.time.LocalDate;
+
+import static org.junit.Assert.assertTrue;
+import static praktikum.EnvConfig.EXPLICIT_WAIT;
 
 public class OrderPageSecond {
     private final WebDriver driver;
@@ -29,6 +35,8 @@ public class OrderPageSecond {
     private final By orderFinalButton = By.xpath("//*[@class='Order_Buttons__1xGrp']//*[text()='Заказать']");
     // Локатор для кнопки "Да", которая подтверждает оформление заказа
     private final By confirmOrder = By.xpath("//*[@class='Button_Button__ra12g Button_Middle__1CSJM' and text()='Да']");
+    // Локатор для модального окна с информацией об успешном создании заказа
+    private final By orderModalHeader = By.xpath("//*[@class='Order_ModalHeader__3FDaJ' and contains(text(), 'Заказ оформлен')]");
 
     // Метод устанавливает дату в инпуте "Когда привести самокат"
     public void setDateToBring () {
@@ -38,7 +46,6 @@ public class OrderPageSecond {
         int dayOfMonth = today.getDayOfMonth();
         String day = String.format("%02d", dayOfMonth);
         driver.findElement(By.className(datepickerDay + day)).click();
-        System.out.println("Date = " + day);
     }
 
     // Метод устанавливает срок аренды
@@ -67,4 +74,11 @@ public class OrderPageSecond {
     public void confirmOrder() {
         driver.findElement(confirmOrder).click();
     }
+    // Метод проверяет что появилось всплывающее окно с сообщением об успешном создании заказа
+    public void checkOrderModal () {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT))
+                .until(ExpectedConditions.visibilityOfElementLocated(orderModalHeader));
+        assertTrue(driver.findElement(orderModalHeader).isDisplayed());
+    }
+
 }
