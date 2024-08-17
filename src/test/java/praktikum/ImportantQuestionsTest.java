@@ -76,7 +76,7 @@ public class ImportantQuestionsTest {
         // Создание локаторов для кнопки и текста
         By questionButton = By.id(buttonId);
         By answerText = By.id(buttonId.replace("heading", "panel")); // заменяем `heading` на `panel` для текста
-        // Скроллим страницу до нужного элемента
+        // Прокручиваем страницу до нужного элемента
         mainMage.scrollForElement(questionButton);
         // Нажимаем на нужный элемент
         mainMage.clickOnQuestion(questionButton);

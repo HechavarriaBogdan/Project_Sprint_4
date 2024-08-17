@@ -38,7 +38,7 @@ public class DriverRule extends ExternalResource {
     public void startChrome() {
         WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(EnvConfig.IMPLICIT_WAIT));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(EnvConfig.CHROME_IMPLICIT_WAIT));
     }
 
     public void startFirefox() {
@@ -46,6 +46,6 @@ public class DriverRule extends ExternalResource {
         var opts = new FirefoxOptions()
                 .configureFromEnv();
         driver = new FirefoxDriver(opts);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(EnvConfig.IMPLICIT_WAIT));
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(EnvConfig.FIREFOX_IMPLICIT_WAIT));
     }
 }
