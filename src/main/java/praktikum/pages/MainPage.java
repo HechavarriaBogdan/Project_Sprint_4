@@ -4,7 +4,14 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import praktikum.EnvConfig;
+
+import java.time.Duration;
+
+import static praktikum.EnvConfig.EXPLICIT_WAIT;
+
 public class MainPage {
     private final WebDriver driver;
 
@@ -36,6 +43,8 @@ public class MainPage {
 
     // Метод нажимает на кнопку "GO" в хедере
     public StatusPage clickOnGo() {
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT))
+                .until(ExpectedConditions.visibilityOfElementLocated(goButton));
         driver.findElement(goButton).click();
         return new StatusPage(driver);
     }

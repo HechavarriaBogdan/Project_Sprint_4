@@ -25,10 +25,6 @@ public class OrderPageSecond {
     private final String datepickerDay = "react-datepicker__day--0";
     // Локатор для инпута выбора срока аренды
     private final By inputRentalPeriod = By.className("Dropdown-root");
-    // Локатор для выбора срока аренды из дропдауна
-    private final By dropdownOption = By.xpath("//*[@class='Dropdown-menu']//*[text()='сутки']");
-    // Локатор для выбора цвета самоката
-    private final By selectColor = By.id("black");
     // Локатор для инпута с комментарием
     private final By inputComment = By.cssSelector("[placeholder='Комментарий для курьера']");
     // Локатор для кнопки "Заказать"
@@ -39,31 +35,29 @@ public class OrderPageSecond {
     private final By orderModalHeader = By.xpath("//*[@class='Order_ModalHeader__3FDaJ' and contains(text(), 'Заказ оформлен')]");
 
     // Метод устанавливает дату в инпуте "Когда привести самокат"
-    public void setDateToBring () {
+    public void setDateToBring (LocalDate dateToBring) {
         WebElement inputElement = driver.findElement(inputDateToBring);
         inputElement.click();
-        LocalDate today = LocalDate.now();
-        int dayOfMonth = today.getDayOfMonth();
+        int dayOfMonth = dateToBring.getDayOfMonth();
         String day = String.format("%02d", dayOfMonth);
         driver.findElement(By.className(datepickerDay + day)).click();
     }
 
     // Метод устанавливает срок аренды
-    public void setRentalPeriod () {
+    public void setRentalPeriod (String dropdownOptions) {
         driver.findElement(inputRentalPeriod).click();
-        driver.findElement(dropdownOption).click();
+        driver.findElement(By.xpath(dropdownOptions)).click();
     }
     // Метод выбирает цвет самоката
-    public void setSelectColor () {
-        driver.findElement(selectColor).click();
+    public void setSelectColor (String selectColor) {
+        driver.findElement(By.id(selectColor)).click();
     }
 
     // Метод заполняет поле ввода комментария
-    public void addComment () {
+    public void addComment (String comment) {
         WebElement inputElement = driver.findElement(inputComment);
         inputElement.click();
         inputElement.clear();
-        String comment = "Тестовый комментарий";
         inputElement.sendKeys(comment);
     }
     // Метод нажимает на кнопку "Заказать"

@@ -27,44 +27,40 @@ public class OrderPageFirst {
     private final By nextButton = By.cssSelector(".Button_Button__ra12g.Button_Middle__1CSJM");
 
     // Метод нажимает на поле ввода имени, зачищает его и вводит Имя
-    public void addName() {
+    public void addName(String name) {
         WebElement inputElement = driver.findElement(inputName);
         inputElement.click();
         inputElement.clear();
-        String name = "Джон";
         inputElement.sendKeys(name);
     }
 
     // Метод нажимает на поле ввода фамилии, зачищает его и вводит Фамилию
-    public void addSurname() {
+    public void addSurname(String surname) {
         WebElement inputElement = driver.findElement(inputSurname);
         inputElement.click();
         inputElement.clear();
-        String surname = "Доу";
         inputElement.sendKeys(surname);
     }
 
     // Метод нажимает на поле ввода адреса, зачищает его и вводит Адрес
-    public void addAddress() {
+    public void addAddress(String address) {
         WebElement inputElement = driver.findElement(inputAddress);
         inputElement.click();
         inputElement.clear();
-        String address = "г.Москва, ул.Ленина 50";
         inputElement.sendKeys(address);
     }
 
     // Метод нажимает на поле ввода "Станция метро" и выбирает станцию
-    public void clickMetro() {
+    public void clickMetro(String metroStationSelector) {
         driver.findElement(inputMetro).click();
-        driver.findElement(metroStation).click();
+        driver.findElement(By.cssSelector(metroStationSelector)).click();
     }
 
     // Метод заполняет поле ввода номера телефона
-    public void addPhoneNumber() {
+    public void addPhoneNumber(String phoneNumber) {
         WebElement inputElement = driver.findElement(inputPhoneNumber);
         inputElement.click();
         inputElement.clear();
-        String phoneNumber = "+79028574588";
         inputElement.sendKeys(phoneNumber);
     }
 
