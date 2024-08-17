@@ -68,7 +68,7 @@ public class ImportantQuestionsTest {
 
 
     @Test
-    public void questionsAbout() throws Exception {
+    public void questionsAbout() {
         WebDriver driver = driverRule.getDriver();
         var mainMage = new MainPage(driver);
         mainMage.open();
