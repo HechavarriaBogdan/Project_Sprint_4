@@ -1,7 +1,7 @@
-target/
+target
 
 ### IntelliJ IDEA ###
-.idea/
+.idea
 
 ### Eclipse ###
 .apt_generated

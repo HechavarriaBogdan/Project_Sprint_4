@@ -49,6 +49,8 @@ public class MainPage {
     public void bottomOrderClick() {
         WebElement scrollElement = driver.findElement(bottomOrderButton);
         ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", scrollElement);
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT))
+                .until(ExpectedConditions.visibilityOfElementLocated(bottomOrderButton));
         scrollElement.click();
     }
 
