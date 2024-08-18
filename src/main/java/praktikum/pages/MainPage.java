@@ -15,30 +15,41 @@ import static praktikum.EnvConfig.EXPLICIT_WAIT;
 public class MainPage {
     private final WebDriver driver;
 
-    //Локатор кнопки "Заказать" в хедере
-    private final By orderButton = By.xpath("(//button[@class='Button_Button__ra12g'])[1]");
+    // Локатор кнопки "Заказать" в верхней части страницы
+    private final By topOrderButton = By.xpath("(//button[@class='Button_Button__ra12g'])[1]");
+    // Локатор кнопки "Заказать" в нижней части страницы
+    private final By bottomOrderButton = By.className("Home_FinishButton__1_cWm");
     // Локатор кнопки "Go" в хедере
     private final By goButton = By.cssSelector(".Header_Button__28dPO");
     // Локатор инпута "Введите номер заказа"
     private final By orderField = By.className("Input_Input__1iN_Z");
     // Локатор кнопки "Статус заказа"
     private final By statusButton = By.className("Header_Link__1TAG7");
-
-
+    // Локатор кнопки "Да все привыкли" для принятия куки
+    private final By acceptCookie = By.id("rcc-confirm-button");
 
     public MainPage(WebDriver driver) {
         this.driver = driver;
     }
 
-    // Метод открывает Web страницу
+    // Метод открывает Web страницу и закрывает боттом-шит про куки
     public void open() {
         driver.get(EnvConfig.BASE_URL);
+        new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT))
+                .until(ExpectedConditions.visibilityOfElementLocated(acceptCookie));
+        driver.findElement(acceptCookie).click();
     }
 
-    // Метод нажимает на кнопку "Заказать" в хедере
+    // Метод нажимает на кнопку "Заказать" в верхней части страницы
+    public void topOrderClick() {
+        driver.findElement(topOrderButton).click();
+    }
 
-    public void headerOrderClick() {
-        driver.findElement(orderButton).click();
+    // Метод нажимает на кнопку "Заказать" в нижней части страницы
+    public void bottomOrderClick() {
+        WebElement scrollElement = driver.findElement(bottomOrderButton);
+        ((JavascriptExecutor)driver).executeScript("arguments[0].scrollIntoView();", scrollElement);
+        scrollElement.click();
     }
 
     // Метод нажимает на кнопку "GO" в хедере

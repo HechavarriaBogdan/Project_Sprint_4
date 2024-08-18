@@ -11,8 +11,9 @@ import praktikum.pages.OrderPageSecond;
 
 import java.time.LocalDate;
 
+
 @RunWith(Parameterized.class)
-public class OrderScooterTest {
+public class TopOrderScooterTest {
     @Rule
     public DriverRule factory = new DriverRule();
 
@@ -26,7 +27,7 @@ public class OrderScooterTest {
     private final String dropdownOptions; // Локатор срока аренды
     private final String selectColor; // Локатор выбора цвета самоката
 
-    public OrderScooterTest(String name, String surname, String address, String phoneNumber, String comment,
+    public TopOrderScooterTest(String name, String surname, String address, String phoneNumber, String comment,
                             LocalDate dateToBring, String metroStationSelector, String dropdownOptions,
                             String selectColor) {
         this.name = name;
@@ -51,14 +52,17 @@ public class OrderScooterTest {
         };
     }
 
+    /** Тест проверяет весь флоу позитивного сценария с двумя наборами данных.
+     *  Точка входа в сценарий - кнопка "Заказать" вверху страницы */
+
     @Test
-    public void orderScooter() throws Exception {
+    public void TopOrderScooter() throws Exception {
         WebDriver driver = factory.getDriver();
         var mainPage = new MainPage(driver);
         var orderPageFirst = new OrderPageFirst(driver);
         var orderPageSecond = new OrderPageSecond(driver);
         mainPage.open();
-        mainPage.headerOrderClick();
+        mainPage.topOrderClick();
         orderPageFirst.addName(name);
         orderPageFirst.addSurname(surname);
         orderPageFirst.addAddress(address);
@@ -74,3 +78,6 @@ public class OrderScooterTest {
         orderPageSecond.checkOrderModal();
     }
 }
+
+
+

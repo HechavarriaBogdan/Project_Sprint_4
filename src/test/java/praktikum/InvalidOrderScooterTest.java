@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import praktikum.pages.MainPage;
 import praktikum.pages.StatusPage;
 
-public class ScooterTest {
+public class InvalidOrderScooterTest {
     @Rule
     public DriverRule factory = new DriverRule();
 

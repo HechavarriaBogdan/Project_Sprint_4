@@ -1,5 +1,6 @@
 package praktikum;
 
+import org.junit.BeforeClass;
 import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -19,6 +20,7 @@ import static org.junit.Assert.assertEquals;
 import static praktikum.EnvConfig.EXPLICIT_WAIT;
 
 @RunWith(Parameterized.class)
+
 
 public class ImportantQuestionsTest {
     // Переменная содержит общий шаблон локаторов для кнопок с вопросами
@@ -56,8 +58,17 @@ public class ImportantQuestionsTest {
     @Parameterized.Parameter(2)
     public String expectedAnswerText;
 
+    // Нужно для того что бы все тесты выполнялись в одном окне
     @ClassRule
     public static DriverRule driverRule = new DriverRule();
+
+    // Закрываем боттом-шит про куки перед запуском параметризованных тестов
+    @BeforeClass
+    public static void setUp() {
+        WebDriver driver = driverRule.getDriver();
+        var mainPage = new MainPage(driver);
+        mainPage.open();
+    }
 
     @Parameterized.Parameters(name = "{index}: Проверка кнопки с ID {0} текста {1} и {2}")
     public static Collection<Object[]> data() {
@@ -68,20 +79,22 @@ public class ImportantQuestionsTest {
         return data;
     }
 
+    /** Тест проверяет ответы на часто задаваемый вопросы.
+     *  Тест выполняется без перезапуска окна браузера */
+
     @Test
     public void questionsAbout() {
         WebDriver driver = driverRule.getDriver();
-        var mainMage = new MainPage(driver);
-        mainMage.open();
+        var mainPage = new MainPage(driver);
         // Создание локаторов для кнопки и текста
         By questionButton = By.id(buttonId);
         By answerText = By.id(buttonId.replace("heading", "panel")); // заменяем `heading` на `panel` для текста
         // Прокручиваем страницу до нужного элемента
-        mainMage.scrollForElement(questionButton);
+        mainPage.scrollForElement(questionButton);
         // Добавили явное ожидание
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT)).until(ExpectedConditions.visibilityOfElementLocated(questionButton));
         // Нажимаем на нужный элемент
-        mainMage.clickOnQuestion(questionButton);
+        mainPage.clickOnQuestion(questionButton);
         // Добавили явное ожидание
         new WebDriverWait(driver, Duration.ofSeconds(EXPLICIT_WAIT)).until(ExpectedConditions.visibilityOfElementLocated(answerText));
         // Сравниваем текст вопроса с ожидаемым результатом
